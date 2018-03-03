@@ -6,6 +6,6 @@ class HelloWorld
 public:
     void write()
     {
-        cout << "Hello world!!" << endl;
+        cout << "Hello world!!!!" << endl;
     }
 };
