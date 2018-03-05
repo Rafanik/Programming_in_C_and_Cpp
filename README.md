@@ -1,3 +1,0 @@
-# ProjectsPW
-Projekty Politechnika Warszawska
-
