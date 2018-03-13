@@ -6,10 +6,16 @@ using namespace std;
 
 int main()
 {
-matrix a(3,4);
-a.value[1][20]=10;
+matrix a(2,1);
+matrix b(2,1);
+a.value[1][1]=10;
+a.value[2][1]=10;
+b.value[1][1]=5;
+b.value[2][1]=10;
+b-=a;
+b-=a;
 
-cout<<a.rows;
-
+cout<<b;
 return 0;
+
 }
