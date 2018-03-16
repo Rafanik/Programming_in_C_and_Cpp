@@ -3,19 +3,22 @@
 
 using namespace std;
 
+matrix inserting(){
+int rows, columns;
+cout<<"Give the dimensions of matrix:"<<endl<<"rows:";
+cin>>rows;
+cout<<"columns:";
+cin>>columns;
+matrix a(rows, columns);
+cin>>a;
+cout<<"Your matrix is:"<<endl<<a;
+return a;
+
+}
 
 int main()
 {
-matrix a(2,1);
-matrix b(2,1);
-a.value[1][1]=10;
-a.value[2][1]=10;
-b.value[1][1]=5;
-b.value[2][1]=10;
-b-=a;
-b-=a;
-
-cout<<b;
+inserting();
 return 0;
 
 }
