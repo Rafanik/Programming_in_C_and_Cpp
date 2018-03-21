@@ -2,7 +2,7 @@
 #include "matrix.h"
 #include <limits.h>
 /* Rafał Szczepanik
-*plik żródłowy klasy matrix
+*plik żródłowy klasy matrix zwierajacy implementacje funkcji testujacych
 */
 
 matrix inserting()//funkcja pozwala uzytkownikowi okreslic wymiary wprowadzanej macierzy a nastepnie wprowadzic jej wartosci poziomu konsoli
