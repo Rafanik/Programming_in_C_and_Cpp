@@ -1,3 +1,7 @@
+/*autor: Rafał Szczepanik
+plik źródłowy zawierajacy implementacje metod klasy matrix naglowek klasy w pliku matrix.h
+*/
+
 #include <iostream>
 #include "matrix.h"
 #include <limits.h>
@@ -252,9 +256,6 @@ void matrix::operator*=(matrix &b)
     {
         cout<<"Matrix dimensions are not correct."<<endl;//komunikat o bledzie
     }
-
     *this=result;
-
-
 }
 
