@@ -1,7 +1,6 @@
 /*autor: Rafał Szczepanik
 plik źródłowy zawierajacy implementacje metod klasy matrix naglowek klasy w pliku matrix.h
 */
-
 #include <iostream>
 #include "matrix.h"
 #include <limits.h>
@@ -47,9 +46,8 @@ ostream& operator<<(ostream &os,matrix &m)
     return os;
 }
 
-istream& operator>>(istream& is,matrix &m)//wprowadzanie wartosci elementow macierzy odbywa sie po wierszu; jezeli zostanie wprowadzone za duzo liczb, ich ilosc zostanie obcieta do wymiaru macierzy
+void operator>>(istream& is,matrix &m)//wprowadzanie wartosci elementow macierzy odbywa sie po wierszu; jezeli zostanie wprowadzone za duzo liczb, ich ilosc zostanie obcieta do wymiaru macierzy
 {
-char check;
     cout<<"Insert "<<m.columns<<" value(s) in each row."<<endl;
     for(int i=0; i<=m.rows-1; i++)
     {
@@ -70,6 +68,23 @@ char check;
             }
         }
     }
+}
+
+int matrix::getValue(int r,int c){
+if(r<=rows-1&&c<=columns-1){
+return value[r-1][c-1];
+}else{
+cout<<"Coordinates are out of range.";
+return 0;
+}
+}
+
+void matrix::setValue(int r, int c, int val){
+if(r<=rows-1&&c<=columns-1){
+value[r-1][c-1]=val;
+}else{
+cout<<"Coordinates are out of range.";
+}
 }
 
 matrix matrix::operator+(const matrix &b) const
@@ -256,6 +271,9 @@ void matrix::operator*=(matrix &b)
     {
         cout<<"Matrix dimensions are not correct."<<endl;//komunikat o bledzie
     }
+
     *this=result;
+
+
 }
 

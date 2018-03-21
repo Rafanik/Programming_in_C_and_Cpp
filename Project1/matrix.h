@@ -15,7 +15,9 @@ matrix(int a=1, int b=1);//konstruktor
 ~matrix();//destruktor;
 
 friend ostream& operator<<(ostream &os,matrix &m);
-friend istream& operator>>(istream &is,matrix &m);
+friend void operator>>(istream &is,matrix &m);
+int getValue(int r,int c);//pobranie wartosci spod danej wspolrzednej
+void setValue(int r, int c, int val);//wpisanie zadanej wartosci pod wspolrzedna
 matrix operator+(const matrix &b)const;
 void operator+=(matrix &b);
 matrix operator-(const matrix &b)const;
@@ -29,6 +31,6 @@ matrix& operator=(const matrix &b);
 
 // Funkcje testujce:
 
-matrix inserting();//funkcja pozwalająca uzytkownikowi stworzyc macierz o zadanych wymiarach i wypelnic jej wartosci
-void test();// funkcja pozwalajaca na przetestowanie dzialania powyzej zdefiniowanych przeciazen operatorow
+matrix inserting();
+void test();
 
