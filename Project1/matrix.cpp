@@ -1,139 +1,274 @@
 #include <iostream>
 #include "matrix.h"
+#include <limits.h>
+
+using namespace std;
+/* klasa matrix reprezentuje macierz; operacje +,-,*,+=,-=,*= w przypadku niezgodnosci wymiarow zwracaja macierz zerowa oraz komunikat o bledzie
+*/
 
 matrix::matrix(int a, int b)
 {
     rows=a;
     columns=b;
-    int** tab;
-    tab = new int* [rows];
+    value = new int* [rows];
     int i;
-    for(i = 0; i <= rows; i++)
-        tab[i] = new int [columns];
-    value = tab;
+    for(i = 0; i <= rows-1; i++)
+        value[i] = new int [columns];
+    for(int i=0; i<=rows-1; i++)
+        {
+            for(int j=0; j<=columns-1; j++)
+            {
+                value[i][j]=0;
+            }
+        }
+}
 
+matrix::~matrix(){
+for(int i =0; i<=rows-1; i++){
+delete[] value[i];
+}
+delete[] value;
 }
 
 ostream& operator<<(ostream &os,matrix &m)
 {
-    for(int i=1; i<=m.rows; i++)
+    for(int i=0; i<=m.rows-1; i++)
     {
-        for(int j=1; j<=m.columns; j++)
+        for(int j=0; j<=m.columns-1; j++)
         {
             os<<m.value[i][j]<<' ';
         }
         os<<endl;
     }
+    return os;
 }
 
-matrix matrix::operator+(matrix &b)
+istream& operator>>(istream& is,matrix &m)//wprowadzanie wartosci elementow macierzy odbywa sie po wierszu; jezeli zostanie wprowadzone za duzo liczb, ich ilosc zostanie obcieta do wymiaru macierzy
 {
-    matrix result(rows,columns);
+char check;
+    cout<<"Insert "<<m.columns<<" value(s) in each row."<<endl;
+    for(int i=0; i<=m.rows-1; i++)
+    {
+        cout<<i<<": ";
+        for(int j=0; j<=m.columns-1; j++)
+        {
+
+            is>>m.value[i][j];
+            if(!is.good()){//sprawdzenie poprawnosci danych
+            is.clear();//wyczyszczenie flag bledow
+            is.ignore(INT_MAX, '\n');//usuniecie z bufora pozostalych znakow az do konca linii
+            cout<<"Bad data."<<endl;//komunikat o blednych danych
+            i--;
+            break;
+            }
+            if(j==m.columns){
+            is.ignore(INT_MAX,'\n');//ignorowanie dlaszych liczb niz dlugosc wiersza
+            }
+        }
+    }
+}
+
+matrix matrix::operator+(const matrix &b) const
+{
+   matrix result(rows,columns);//warunek aby macierze mozna bylo dodac
+
     if(rows==b.rows&&columns==b.columns)
     {
-        for(int i=1; i<=rows; i++)
+
+        for(int i=0; i<=rows-1; i++)
         {
-            for(int j=1; j<=columns; j++)
+            for(int j=0; j<=columns-1; j++)
             {
                 result.value[i][j]=(value[i][j]+b.value[i][j]);
             }
         }
-        return result;
-    }else{
-    cout<<"Matrix dimensions are not correct.";
-
     }
-
-}
-
-bool matrix::operator==(matrix &b)
-{
-    if(rows==b.rows&&columns==b.columns)
+    else
     {
-        for(int i=1; i<=rows; i++)
-        {
-            for(int j=1; j<=columns; j++)
-            {
-                if(value[i][j]!=b.value[i][j]){
-                return 0;
-                }
-            }
-        }
-        return 1;
-    }else{
-    return 0;
-
+        cout<<"Matrix dimensions are not correct."<<endl;//komunikat o bledzie
     }
-
+    return result;
 }
 
-istream& operator>>(istream &is,matrix &m){
-cout<<"Insert "<<m.columns<<" value(s) in each row."<<endl;
-for(int i=1; i<=m.rows; i++)
-        {
-        cout<<i<<": ";
-            for(int j=1; j<=m.columns; j++)
-            {
-            is>>m.value[i][j];
-            }
-        }
-
-}
-
-bool matrix::operator!=(matrix &b)
-{
-    return !matrix::operator==(b);
-
-}
-
-void matrix::operator+=(matrix &b){
-if(rows==b.rows&&columns==b.columns)
-    {
-        for(int i=1; i<=rows; i++)
-        {
-            for(int j=1; j<=columns; j++)
-            {
-                value[i][j]=(value[i][j]+b.value[i][j]);
-            }
-        }
-    }else{
-    cout<<"Matrix dimensions are not correct.";
-
-    }
-}
-
-matrix matrix::operator-(matrix &b)
+matrix matrix::operator-(const matrix &b)const
 {
     matrix result(rows,columns);
-    if(rows==b.rows&&columns==b.columns)
+    if(rows==b.rows&&columns==b.columns)//warunek aby macierze mozna bylo odjac
     {
-        for(int i=1; i<=rows; i++)
+        for(int i=0; i<=rows-1; i++)
         {
-            for(int j=1; j<=columns; j++)
+            for(int j=0; j<=columns-1; j++)
             {
                 result.value[i][j]=(value[i][j]-b.value[i][j]);
             }
         }
-        return result;
-    }else{
-    cout<<"Matrix dimensions are not correct.";
-
     }
-
+    else
+    {
+        cout<<"Matrix dimensions are not correct."<<endl;//komunikat o bledzie
+    }
+    return result;
 }
 
-void matrix::operator-=(matrix &b){
-if(rows==b.rows&&columns==b.columns)
+matrix matrix::operator*(const matrix &b)const
+{
+
+    matrix result(rows,b.columns);
+
+    if(columns==b.rows&&rows==b.columns)//warunek aby dalo sie pomnozyc macierze
     {
-        for(int i=1; i<=rows; i++)
+
+        for(int i=0; i<=rows-1; i++)
         {
-            for(int j=1; j<=columns; j++)
+            for(int j=0; j<=columns-1; j++)
             {
-                value[i][j]=(value[i][j]-b.value[i][j]);
+                for(int k=1;k<=rows;k++)
+                result.value[i][j]=result.value[i][j]+(value[i][k]*b.value[k][j]);//wypelnianie kolejnych elementow macierzy
             }
         }
-    }else{
-    cout<<"Matrix dimensions are not correct.";
+    return result;
+    }
+    else
+    {
+        cout<<"Matrix dimensions are not correct."<<endl;//komunikat bledu
+        return result;
+    }
 
+}
+
+void matrix::operator=(matrix &b)
+{
+    for(int i = 0; i<=rows-1; i++)//zwolnienie pamieci pierwotnej macierzy
+    {
+        delete[] value[i];
+    }
+    delete[] value;
+    rows=b.rows;//przypisanie wartosci liczby wierszy i kolumn
+    columns=b.columns;
+    value = new int* [rows];//zaalokowanie nowej macierzy
+    for(int i = 0; i <= rows-1; i++)
+    {
+        value[i] = new int [columns];
+    }
+    for(int i=0; i<=rows-1; i++)//wpisanie wartosci do nowej macierzy
+        {
+            for(int j=0; j<=columns-1; j++)
+            {
+                value[i][j]=b.value[i][j];
+            }
+        }
+}
+
+
+bool matrix::operator==(matrix &b)
+{
+    if(rows==b.rows&&columns==b.columns)//sprawdzenie warunku zgodnosci wymiarow
+    {
+        for(int i=0; i<=rows-1; i++)
+        {
+            for(int j=0; j<=columns-1; j++)
+            {
+                if(value[i][j]!=b.value[i][j])//sprawdzenie warunku zgodnosci wartosci elementow
+                {
+                    return 0;
+                }
+            }
+        }
+        return 1;
+    }
+    else
+    {
+        return 0;
     }
 }
+
+
+bool matrix::operator!=(matrix &b)
+{
+    return !matrix::operator==(b);//dzialanie antagonistyczne do operatora ==
+}
+
+void matrix::operator+=(matrix &b)
+{
+    if(rows==b.rows&&columns==b.columns)//sprawdzenie czy macierze mozna dodac
+    {
+        for(int i=0; i<=rows-1; i++)
+        {
+            for(int j=0; j<=columns-1; j++)
+            {
+                value[i][j]=(value[i][j]+b.value[i][j]);//przypisanie wartosci kolejnym elementom
+            }
+        }
+    }
+    else
+    {
+        cout<<"Matrix dimensions are not correct."<<endl;//komunikat o bledzie
+    }
+}
+
+
+
+void matrix::operator-=(matrix &b)
+{
+    if(rows==b.rows&&columns==b.columns)//sprawdzenie czy macierze mozna odjac
+    {
+        for(int i=0; i<=rows-1; i++)
+        {
+            for(int j=0; j<=columns-1; j++)
+            {
+                value[i][j]=(value[i][j]-b.value[i][j]);//przypisanie wartosci kolejnym elementom
+            }
+        }
+    }
+    else
+    {
+        cout<<"Matrix dimensions are not correct."<<endl;//komunikat o bledzie
+    }
+}
+
+
+
+void matrix::operator*=(matrix &b)
+{
+
+    matrix result(rows,b.columns);
+
+    if(columns==b.rows&&rows==b.columns)//sprawdzenie czy macierze da sie wymnozyc
+    {
+
+        for(int i=0; i<=rows-1; i++)
+        {
+            for(int j=0; j<=columns-1; j++)
+            {
+                for(int k=0; k<=rows-1; k++)
+                    result.value[i][j]=result.value[i][j]+(value[i][k]*b.value[k][j]);//przypisanie wartosci do tymczasowego wyniku
+            }
+        }
+    }
+    else
+    {
+        cout<<"Matrix dimensions are not correct."<<endl;//komunikat o bledzie
+    }
+
+    for(int i =0; i<=rows-1; i++)//zwolnienie pamieci macierzy
+    {
+        delete[] value[i];
+    }
+    delete[] value;
+    rows=result.rows;
+    columns=result.columns;
+    value = new int* [rows];//zaalokowanie nowej macierzy
+    int i;
+    for(i = 0; i <= rows-1; i++)
+        value[i] = new int [columns];
+    for(int i=0; i<=rows-1; i++)//przypisanie wartosci macierzy tymczasowej do pierwotnej macierzy
+    {
+        for(int j=0; j<=columns-1; j++)
+        {
+            value[i][j]=result.value[i][j];
+        }
+    }
+
+
+}
+

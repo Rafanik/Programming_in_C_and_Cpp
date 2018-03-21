@@ -3,22 +3,16 @@
 
 using namespace std;
 
-matrix inserting(){
-int rows, columns;
-cout<<"Give the dimensions of matrix:"<<endl<<"rows:";
-cin>>rows;
-cout<<"columns:";
-cin>>columns;
-matrix a(rows, columns);
-cin>>a;
-cout<<"Your matrix is:"<<endl<<a;
-return a;
-
-}
-
 int main()
 {
-inserting();
+matrix a(1,2);
+a.value[0][0]=1;
+matrix b(1,2);
+b.value[0][0]=2;
+
+a-=b;
+cout<<a;
+
 return 0;
 
 }
