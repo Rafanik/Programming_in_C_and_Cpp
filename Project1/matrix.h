@@ -1,3 +1,7 @@
+/*
+autor: Rafał Szczepanik
+plik nagłówkowy klasy matrix
+*/
 #include <iostream>
 
 using namespace std;
@@ -25,6 +29,6 @@ matrix& operator=(const matrix &b);
 
 // Funkcje testujce:
 
-matrix inserting();
-void test();
+matrix inserting();//funkcja pozwalająca uzytkownikowi stworzyc macierz o zadanych wymiarach i wypelnic jej wartosci
+void test();// funkcja pozwalajaca na przetestowanie dzialania powyzej zdefiniowanych przeciazen operatorow
 
