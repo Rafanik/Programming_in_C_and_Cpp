@@ -20,7 +20,7 @@ matrix operator*(const matrix &b)const;
 void operator*=(matrix &b);
 bool operator==(matrix &b);
 bool operator!=(matrix &b);
-void operator=(matrix &b);
+matrix& operator=(const matrix &b);
 };
 
 // Funkcje testujce:

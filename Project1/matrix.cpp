@@ -49,7 +49,7 @@ char check;
     cout<<"Insert "<<m.columns<<" value(s) in each row."<<endl;
     for(int i=0; i<=m.rows-1; i++)
     {
-        cout<<i<<": ";
+        cout<<i+1<<": ";
         for(int j=0; j<=m.columns-1; j++)
         {
 
@@ -61,7 +61,7 @@ char check;
             i--;
             break;
             }
-            if(j==m.columns){
+            if(j==m.columns-1){
             is.ignore(INT_MAX,'\n');//ignorowanie dlaszych liczb niz dlugosc wiersza
             }
         }
@@ -115,14 +115,14 @@ matrix matrix::operator*(const matrix &b)const
 
     matrix result(rows,b.columns);
 
-    if(columns==b.rows&&rows==b.columns)//warunek aby dalo sie pomnozyc macierze
+    if(columns==b.rows)//warunek aby dalo sie pomnozyc macierze
     {
 
-        for(int i=0; i<=rows-1; i++)
+        for(int i=0; i<=result.rows-1; i++)
         {
-            for(int j=0; j<=columns-1; j++)
+            for(int j=0; j<=result.columns-1; j++)
             {
-                for(int k=1;k<=rows;k++)
+                for(int k=0;k<=columns-1;k++)
                 result.value[i][j]=result.value[i][j]+(value[i][k]*b.value[k][j]);//wypelnianie kolejnych elementow macierzy
             }
         }
@@ -136,8 +136,10 @@ matrix matrix::operator*(const matrix &b)const
 
 }
 
-void matrix::operator=(matrix &b)
+
+matrix& matrix::operator=(const matrix &b)
 {
+
     for(int i = 0; i<=rows-1; i++)//zwolnienie pamieci pierwotnej macierzy
     {
         delete[] value[i];
@@ -157,6 +159,7 @@ void matrix::operator=(matrix &b)
                 value[i][j]=b.value[i][j];
             }
         }
+return *this;
 }
 
 
@@ -233,15 +236,15 @@ void matrix::operator*=(matrix &b)
 
     matrix result(rows,b.columns);
 
-    if(columns==b.rows&&rows==b.columns)//sprawdzenie czy macierze da sie wymnozyc
+    if(columns==b.rows)//warunek aby dalo sie pomnozyc macierze
     {
 
-        for(int i=0; i<=rows-1; i++)
+        for(int i=0; i<=result.rows-1; i++)
         {
-            for(int j=0; j<=columns-1; j++)
+            for(int j=0; j<=result.columns-1; j++)
             {
-                for(int k=0; k<=rows-1; k++)
-                    result.value[i][j]=result.value[i][j]+(value[i][k]*b.value[k][j]);//przypisanie wartosci do tymczasowego wyniku
+                for(int k=0;k<=columns-1;k++)
+                result.value[i][j]=result.value[i][j]+(value[i][k]*b.value[k][j]);//wypelnianie kolejnych elementow macierzy
             }
         }
     }
@@ -250,24 +253,7 @@ void matrix::operator*=(matrix &b)
         cout<<"Matrix dimensions are not correct."<<endl;//komunikat o bledzie
     }
 
-    for(int i =0; i<=rows-1; i++)//zwolnienie pamieci macierzy
-    {
-        delete[] value[i];
-    }
-    delete[] value;
-    rows=result.rows;
-    columns=result.columns;
-    value = new int* [rows];//zaalokowanie nowej macierzy
-    int i;
-    for(i = 0; i <= rows-1; i++)
-        value[i] = new int [columns];
-    for(int i=0; i<=rows-1; i++)//przypisanie wartosci macierzy tymczasowej do pierwotnej macierzy
-    {
-        for(int j=0; j<=columns-1; j++)
-        {
-            value[i][j]=result.value[i][j];
-        }
-    }
+    *this=result;
 
 
 }
