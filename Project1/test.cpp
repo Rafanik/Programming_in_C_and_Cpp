@@ -1,6 +1,9 @@
 #include <iostream>
 #include "matrix.h"
 #include <limits.h>
+/* Rafał Szczepanik
+*plik żródłowy klasy matrix
+*/
 
 matrix inserting()//funkcja pozwala uzytkownikowi okreslic wymiary wprowadzanej macierzy a nastepnie wprowadzic jej wartosci poziomu konsoli
 {
@@ -93,7 +96,6 @@ while(!cin.good())//zabezpieczenie przed wpisaniem blednego znaku
 
  cout<<"Do you want to perform another operation? (1/0)";
  cin>>exit;
-
 
  }
  }
