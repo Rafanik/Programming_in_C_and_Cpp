@@ -18,19 +18,21 @@ matrix::matrix(int a, int b)
     for(i = 0; i <= rows-1; i++)
         value[i] = new int [columns];
     for(int i=0; i<=rows-1; i++)
+    {
+        for(int j=0; j<=columns-1; j++)
         {
-            for(int j=0; j<=columns-1; j++)
-            {
-                value[i][j]=0;
-            }
+            value[i][j]=0;
         }
+    }
 }
 
-matrix::~matrix(){
-for(int i =0; i<=rows-1; i++){
-delete[] value[i];
-}
-delete[] value;
+matrix::~matrix()
+{
+    for(int i =0; i<=rows-1; i++)
+    {
+        delete[] value[i];
+    }
+    delete[] value;
 }
 
 ostream& operator<<(ostream &os,matrix &m)
@@ -56,40 +58,50 @@ void operator>>(istream& is,matrix &m)//wprowadzanie wartosci elementow macierzy
         {
 
             is>>m.value[i][j];
-            if(!is.good()){//sprawdzenie poprawnosci danych
-            is.clear();//wyczyszczenie flag bledow
-            is.ignore(INT_MAX, '\n');//usuniecie z bufora pozostalych znakow az do konca linii
-            cout<<"Bad data."<<endl;//komunikat o blednych danych
-            i--;
-            break;
+            if(!is.good()) //sprawdzenie poprawnosci danych
+            {
+                is.clear();//wyczyszczenie flag bledow
+                is.ignore(INT_MAX, '\n');//usuniecie z bufora pozostalych znakow az do konca linii
+                cout<<"Bad data."<<endl;//komunikat o blednych danych
+                i--;
+                break;
             }
-            if(j==m.columns-1){
-            is.ignore(INT_MAX,'\n');//ignorowanie dlaszych liczb niz dlugosc wiersza
+            if(j==m.columns-1)
+            {
+                is.ignore(INT_MAX,'\n');//ignorowanie dlaszych liczb niz dlugosc wiersza
             }
         }
     }
 }
 
-int matrix::getValue(int r,int c){
-if(r<=rows-1&&c<=columns-1){
-return value[r-1][c-1];
-}else{
-cout<<"Coordinates are out of range.";
-return 0;
-}
+int matrix::getValue(int r,int c)
+{
+    if(r<=rows&&c<=columns)
+    {
+        return value[r-1][c-1];
+    }
+    else
+    {
+        cout<<"Coordinates are out of range.";
+        return 0;
+    }
 }
 
-void matrix::setValue(int r, int c, int val){
-if(r<=rows-1&&c<=columns-1){
-value[r-1][c-1]=val;
-}else{
-cout<<"Coordinates are out of range.";
-}
+void matrix::setValue(int r, int c, int val)
+{
+    if(r<=rows&&c<=columns)
+    {
+        value[r-1][c-1]=val;
+    }
+    else
+    {
+        cout<<"Coordinates are out of range.";
+    }
 }
 
 matrix matrix::operator+(const matrix &b) const
 {
-   matrix result(rows,columns);//warunek aby macierze mozna bylo dodac
+    matrix result(rows,columns);//warunek aby macierze mozna bylo dodac
 
     if(rows==b.rows&&columns==b.columns)
     {
@@ -141,11 +153,11 @@ matrix matrix::operator*(const matrix &b)const
         {
             for(int j=0; j<=result.columns-1; j++)
             {
-                for(int k=0;k<=columns-1;k++)
-                result.value[i][j]=result.value[i][j]+(value[i][k]*b.value[k][j]);//wypelnianie kolejnych elementow macierzy
+                for(int k=0; k<=columns-1; k++)
+                    result.value[i][j]=result.value[i][j]+(value[i][k]*b.value[k][j]);//wypelnianie kolejnych elementow macierzy
             }
         }
-    return result;
+        return result;
     }
     else
     {
@@ -172,13 +184,13 @@ matrix& matrix::operator=(const matrix &b)
         value[i] = new int [columns];
     }
     for(int i=0; i<=rows-1; i++)//wpisanie wartosci do nowej macierzy
+    {
+        for(int j=0; j<=columns-1; j++)
         {
-            for(int j=0; j<=columns-1; j++)
-            {
-                value[i][j]=b.value[i][j];
-            }
+            value[i][j]=b.value[i][j];
         }
-return *this;
+    }
+    return *this;
 }
 
 
@@ -262,8 +274,8 @@ void matrix::operator*=(matrix &b)
         {
             for(int j=0; j<=result.columns-1; j++)
             {
-                for(int k=0;k<=columns-1;k++)
-                result.value[i][j]=result.value[i][j]+(value[i][k]*b.value[k][j]);//wypelnianie kolejnych elementow macierzy
+                for(int k=0; k<=columns-1; k++)
+                    result.value[i][j]=result.value[i][j]+(value[i][k]*b.value[k][j]);//wypelnianie kolejnych elementow macierzy
             }
         }
     }
