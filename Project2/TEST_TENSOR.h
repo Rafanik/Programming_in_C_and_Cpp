@@ -1,27 +1,29 @@
 #ifndef TEST_TENSOR_H_INCLUDED
 #define TEST_TENSOR_H_INCLUDED
-//plik naglowkowy funkcji testujacych szablon klasy Tensor
+/*plik naglowkowy funkcji testujacych szablon klasy Tensor - testowane tensory (tens1, tens2) mają wymiar 1x1x2
+wynik działania porównywany jest z przewidywanym wynikiem (wynik)*/
 #include "TENSOR.H"
 template <class T>
 class TestTensor{
-Tensor<T> tens1;
+Tensor<T> tens1;// tensory, na których wykonywane będą testowane metody
 Tensor<T> tens2;
-Tensor<T> wynik;;
+Tensor<T> wynik;// tensor, który będzie porównywany z wynikiem działania odpowiednich metod
 public:
-TestTensor(Tensor<T> &, Tensor<T> &, Tensor<T> &);
+TestTensor(Tensor<T> &, Tensor<T> &, Tensor<T> &);//konstruktor tworzący 
 //metody
 void reset(T , T , T , T );//ustawienie poczatkowych wartosci testujacych
-void setResult(T,T);
-bool testOpPlus();
-bool testOpPlusEq();
-bool testOpMin();
-bool testOpMinEq();
-bool testOpMul();
-bool testOpMulEq();
-bool testOpEq(bool);
-bool testOpDif(bool);
-bool testOpPrz();
-bool testChangeRead(T);
+void setResult(T,T); //ustawienie wartości oczekiwanego wyniku
+// metody testujące odpowiednie metody klasy szablonowej Tensor 
+bool testOpPlus();//+
+bool testOpPlusEq();//+=
+bool testOpMin();//-
+bool testOpMinEq();//-=
+bool testOpMul();//*
+bool testOpMulEq();//*=
+bool testOpEq(bool);//==
+bool testOpDif(bool);//!=
+bool testOpPrz();//=
+bool testChangeRead(T);//metody read i change
 };
 
 template <class T>
