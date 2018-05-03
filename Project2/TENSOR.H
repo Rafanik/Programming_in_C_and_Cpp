@@ -2,9 +2,14 @@
 #define TENSOR_H_INCLUDED
 #include <string>
 #include <iomanip>
-#define ERROR "Dimensions are incorrect!"
 
 using namespace std;
+
+template <class T> class Tensor;
+template <class T> std::istream& operator>>( std::istream &is, Tensor<T> &t);
+
+template <class T> class Tensor;
+template <class T> std::ostream& operator<<( std::ostream &os, const Tensor<T> &t);
 
 template <class T>
 class Tensor
@@ -17,71 +22,80 @@ public:
     Tensor( T const &);  //konstruktor kopiujacy
     ~Tensor();  //destruktor
     //przeciazenia operatorow
-    Tensor& operator=(Tensor const &);
+    Tensor& operator=(const Tensor &);
     bool operator==(Tensor const &);
     bool operator!=(Tensor const &);
-    Tensor operator+(const Tensor &);
+    Tensor operator+(Tensor const &);
     Tensor& operator+=(Tensor const &);
-    Tensor operator-(Tensor const &);
+    Tensor operator-(Tensor const &) const;
     Tensor& operator-=(Tensor const &);
     Tensor operator*(Tensor const &);
     Tensor& operator*=(Tensor const &);
     //metody klasy
     inline T read(int a, int b, int c)
     {
-        if (a>dimx||b>dimy||c>dimz) cerr<<ERROR<<endl;
+        if (a>dimx||b>dimy||c>dimz) throw 1;
         else return tab[a][b][c];
-    };
+    }
+
     void change(T, int, int, int);
 
-    friend ostream& operator<< (ostream &os, const Tensor<T> &t)
-    {
+    friend ostream& operator<< <> (ostream &os, const Tensor<T> &t);
 
-        for (int i=0; i<t.dimx; i++)
-        {
-            for (int j=0; j<t.dimy; j++)
-            {
-                for (int k=0; k<t.dimz; k++)
-                {
-                    os<<setfill(' ');
-                    os<<setw(5);
-                    os<<t.tab[i][j][k];
-                }
-                os<<"\n";
-            }
-            os<<setfill('*');
-            os<<setw(5*t.dimz)<<'*'<<endl;
-        }
-        return os;
-    }
-    friend istream& operator>>(istream &is, Tensor &t)
-    {
-        T liczba;
-        for(int i=0; i<t.dimx; i++)
-        {
-            for (int j=0; j<t.dimy; j++)
-            {
-                cout<<"Podaj "<<t.dimz<<" liczb/y dla "<<i+1<<". wiersza i "<<j+1<<". kolumny:"<<endl;
-                for (int k=0; k<t.dimz; k++)
-                {
-                    is>>liczba;
-                    if (is.good())   //jesli wczytana dana jest lub moze byc przekonwertowana na typ double
-                    {
-                        t.tab[i][j][k]=liczba;
-                        //t.val=liczba;
-                    }
-                    else   //w przeciwnym przypadku blad
-                    {
-                        k--;
-                        is.clear();
-                        is.sync();
-                    }
-                }
-            }
-        }
-        return is;
-    }
+    friend istream& operator>> <> (istream &is, Tensor<T> &t);
+
 };
+
+template <class T>
+std::ostream& operator<<(std::ostream &os, const Tensor<T> &t)
+{
+
+    for (int i=0; i<t.dimx; i++)
+    {
+        for (int j=0; j<t.dimy; j++)
+        {
+            for (int k=0; k<t.dimz; k++)
+            {
+                os<<setfill(' ');
+                os<<setw(5);//ustawienie szerokosci pola
+                os<<t.tab[i][j][k];
+            }
+            os<<"\n";
+        }
+        os<<setfill('*');//oddzielenie pol symbolami '*'
+        os<<setw(5*t.dimz)<<'*'<<endl;
+    }
+    return os;
+}
+
+template <class T>
+std:: istream& operator>> (istream &is, Tensor<T> &t)
+{
+    T liczba;
+    for(int i=0; i<t.dimx; i++)
+    {
+        for (int j=0; j<t.dimy; j++)
+        {
+            cout<<"Podaj "<<t.dimz<<" liczb/y dla "<<i+1<<". wiersza i "<<j+1<<". kolumny:"<<endl;
+            for (int k=0; k<t.dimz; k++)
+            {
+                is>>liczba;
+                if (is.good())   //jesli wczytana dana jest lub moze byc przekonwertowana na dany type
+                {
+                    t.tab[i][j][k]=liczba;
+                }
+                else   //w przeciwnym przypadku blad
+                {
+                    k--;
+                    is.clear();
+                    is.sync();
+                }
+            }
+        }
+    }
+    return is;
+}
+
 
 template <class T>
 Tensor<T>::Tensor( int x=0, int y=0, int z=0)  //konstruktor podstawowy
@@ -112,7 +126,7 @@ Tensor<T>::Tensor( T const &t)  //konstruktor kopiujacy
             tab[i][j]=new T [t.dimz];
             for (int k=0; k<t.dimz; k++)
             {
-                tab[i][j][k]=t.tab[i][j][k];
+                this->tab[i][j][k]=t.tab[i][j][k];
             }
         }
 
@@ -136,25 +150,27 @@ Tensor<T>::~Tensor()  //destruktor
     delete[] tab;
 }
 
+
 template <class T>
-Tensor<T>& Tensor<T>::operator=(Tensor<T> const  &t)
+Tensor<T>& Tensor<T>::operator=(const Tensor &t) //przypisanie tensora
 {
-if(this==&t) return *this;
     dimx=t.dimx;
     dimy=t.dimy;
-    dimz=t.dimz;//pamiec
+    dimz=t.dimz;
     tab = new T** [dimx];
-    for (int i=0; i<dimx; i++)
+
+    for(int i=0; i<dimx; i++)
     {
-        tab[i]=new T* [dimy];
+        tab[i] = new T* [dimy];
         for(int j=0; j<dimy; j++)
         {
-            tab[i][j]= new T [dimz];
+            tab[i][j] = new T [dimz];
         }
     }
-    for (int i=0; i<dimx; i++) //przepisanie wartosci
+
+    for(int i=0; i<dimx; i++)
     {
-        for (int j=0; j<dimy; j++)
+        for(int j=0; j<dimy; j++)
         {
             for(int k=0; k<dimz; k++)
             {
@@ -162,20 +178,21 @@ if(this==&t) return *this;
             }
         }
     }
+
     return *this;
 }
 
 template <class T>
-bool Tensor<T>::operator==(Tensor const  &t)
+bool Tensor<T>::operator==(Tensor const  &t)// porownanie tensora
 {
-    if (!(dimx==t.dimx&&dimy==t.dimy&&dimz==t.dimz)) return false;
+    if (!(dimx==t.dimx&&dimy==t.dimy&&dimz==t.dimz)) return false;//porownanie wymiarow
     for (int i=0; i<dimx; i++)
     {
         for (int j=0; j<dimy; j++)
         {
             for(int k=0; k<dimz; k++)
             {
-                if(this->tab[i][j][k]!=t.tab[i][j][k]) return false;
+                if(this->tab[i][j][k]!=t.tab[i][j][k]) return false;//porownanie poszczegolnych wartosci
             }
         }
     }
@@ -183,13 +200,13 @@ bool Tensor<T>::operator==(Tensor const  &t)
 }
 
 template<class T>
-bool Tensor<T>::operator!=(Tensor const  &t)
+bool Tensor<T>::operator!=(Tensor const  &t)//dzialanie przeciwne do ==
 {
     return !(*this==t);
 }
 
 template<class T>
-Tensor<T> Tensor<T>::operator+(const Tensor   &t)
+Tensor<T> Tensor<T>::operator+(Tensor const &t)
 {
     Tensor p(dimx, dimy, dimz);
 
@@ -203,7 +220,7 @@ Tensor<T> Tensor<T>::operator+(const Tensor   &t)
             {
                 for(int k=0; k<dimz; k++)
                 {
-                    p.tab[i][j][k]=tab[i][j][k]+t.tab[i][j][k];
+                    p.tab[i][j][k]=this->tab[i][j][k]+t.tab[i][j][k];//sumowanie wartosci poszczegolnych pol
 
                 }
             }
@@ -212,14 +229,14 @@ Tensor<T> Tensor<T>::operator+(const Tensor   &t)
     }
     else
     {
-        cerr<<ERROR<<endl;
+        throw 1;//rzucenie wartoscia w przypadku bledu
     }
 }
 template<class T>
 Tensor<T>& Tensor<T>::operator+=(Tensor const  &t)
 {
     if (!(dimx==t.dimx&&dimy==t.dimy&&dimz==t.dimz))
-        cerr<<ERROR<<endl;
+        throw 1;//rzucenie bledem w przypadku konfliktu wymiarow
     else
     {
         for (int i=0; i<dimx; i++)
@@ -228,7 +245,7 @@ Tensor<T>& Tensor<T>::operator+=(Tensor const  &t)
             {
                 for(int k=0; k<dimz; k++)
                 {
-                    tab[i][j][k]=tab[i][j][k]+t.tab[i][j][k];
+                    this->tab[i][j][k]=this->tab[i][j][k]+t.tab[i][j][k];//sumowanie wartosci poszczegolnych pol
                 }
             }
         }
@@ -237,9 +254,9 @@ Tensor<T>& Tensor<T>::operator+=(Tensor const  &t)
 }
 
 template<class T>
-Tensor<T> Tensor<T>::operator-(Tensor const  &t)
+Tensor<T> Tensor<T>::operator-(Tensor const  &t) const
 {
-    Tensor p(dimx, dimy, dimz);
+    Tensor p(dimx, dimy, dimz);// tensor pomocniczy
 
     if ((dimx==t.dimx)&&(dimy==t.dimy)&&(dimz==t.dimz))
     {
@@ -251,7 +268,7 @@ Tensor<T> Tensor<T>::operator-(Tensor const  &t)
             {
                 for(int k=0; k<dimz; k++)
                 {
-                    p.tab[i][j][k]=tab[i][j][k]-t.tab[i][j][k];
+                    p.tab[i][j][k]=this->tab[i][j][k]-t.tab[i][j][k];//odejmowanie warotsci poszczegolnych pol
 
                 }
             }
@@ -260,7 +277,7 @@ Tensor<T> Tensor<T>::operator-(Tensor const  &t)
     }
     else
     {
-        cerr<<ERROR<<endl;
+        throw 1;//rzucenie bledem w przypadku konfliktu wymiarow
     }
 }
 
@@ -268,7 +285,7 @@ template<class T>
 Tensor<T>& Tensor<T>::operator-=(Tensor const  &t)
 {
     if (!(dimx==t.dimx&&dimy==t.dimy&&dimz==t.dimz))
-        cerr<<ERROR<<endl;
+        throw 1;// rzucenie bledem w wprzypadku konfliktu wymiarow
     else
     {
         for (int i=0; i<dimx; i++)
@@ -277,7 +294,7 @@ Tensor<T>& Tensor<T>::operator-=(Tensor const  &t)
             {
                 for(int k=0; k<dimz; k++)
                 {
-                    tab[i][j][k]=tab[i][j][k]-t.tab[i][j][k];
+                    this->tab[i][j][k]=this->tab[i][j][k]-t.tab[i][j][k];// odejmowanie wartosci poszczegolnych pol
                 }
             }
         }
@@ -300,7 +317,7 @@ Tensor<T> Tensor<T>::operator*(Tensor const  &t)
             {
                 for(int k=0; k<dimz; k++)
                 {
-                    p.tab[i][j][k]=tab[i][j][k]*t.tab[i][j][k];
+                    p.tab[i][j][k]=this->tab[i][j][k]*t.tab[i][j][k];//mnozenie wartosci poszczegolnych pol
 
                 }
             }
@@ -309,7 +326,7 @@ Tensor<T> Tensor<T>::operator*(Tensor const  &t)
     }
     else
     {
-        cerr<<ERROR<<endl;
+        throw 1;// rzucenie bledem w przypadku konfliktu wymiarow
     }
 }
 
@@ -317,7 +334,7 @@ template<class T>
 Tensor<T>& Tensor<T>::operator*=(Tensor const  &t)
 {
     if (!(dimx==t.dimx&&dimy==t.dimy&&dimz==t.dimz))
-        cerr<<ERROR<<endl;
+        throw 1;// rzucenie bledem w wprzypadku konfliktu wymiarow
     else
     {
         for (int i=0; i<dimx; i++)
@@ -326,7 +343,7 @@ Tensor<T>& Tensor<T>::operator*=(Tensor const  &t)
             {
                 for(int k=0; k<dimz; k++)
                 {
-                    tab[i][j][k]=tab[i][j][k]*t.tab[i][j][k];
+                    this->tab[i][j][k]=this->tab[i][j][k]*t.tab[i][j][k];// mnozenie poszczegolncyh wartosci pol
                 }
             }
         }
@@ -337,8 +354,8 @@ Tensor<T>& Tensor<T>::operator*=(Tensor const  &t)
 template <class T>
 void Tensor<T>::change(T w, int a, int b, int c)
 {
-    if(a>dimx||b>dimy||c>dimz) cerr<<"No match!"<<endl;
-    else tab[a][b][c]=w;
+    if(a>dimx||b>dimy||c>dimz) throw 1;//rzucenie bledem gdy rzadana wspolrzedna wykracza poza rozmiar tensora
+    else this->tab[a][b][c]=w;
     return;
 }
 

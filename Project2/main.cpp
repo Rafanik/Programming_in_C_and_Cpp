@@ -1,12 +1,18 @@
 #include <iostream>
+#include <complex>
 #include "TENSOR.H"
 #include "TEST_TENSOR.h"
+
 using namespace std;
 
 int main()
 {
 
-    testInt();
-    testDouble();
-    return 0;
+    cout<<testComplex()<<endl;
+    cout<<testInt()<<endl;
+    cout<<testDouble()<<endl;
+    cout<<testDimensions()<<endl;
+    testCinCout();
+
 }
+

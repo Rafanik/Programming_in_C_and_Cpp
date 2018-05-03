@@ -1,108 +1,21 @@
 #ifndef TEST_TENSOR_H_INCLUDED
 #define TEST_TENSOR_H_INCLUDED
-/*plik naglowkowy funkcji testujacych szablon klasy Tensor - testowane tensory (tens1, tens2) mają wymiar 1x1x2
-wynik działania porównywany jest z przewidywanym wynikiem (wynik)*/
+//plik naglowkowy funkcji testujacych szablon klasy Tensor
 #include "TENSOR.H"
-template <class T>
-class TestTensor{
-Tensor<T> tens1;// tensory, na których wykonywane będą testowane metody
-Tensor<T> tens2;
-Tensor<T> wynik;// tensor, który będzie porównywany z wynikiem działania odpowiednich metod
-public:
-TestTensor(Tensor<T> &, Tensor<T> &, Tensor<T> &);//konstruktor tworzący 
-//metody
-void reset(T , T , T , T );//ustawienie poczatkowych wartosci testujacych
-void setResult(T,T); //ustawienie wartości oczekiwanego wyniku
-// metody testujące odpowiednie metody klasy szablonowej Tensor 
-bool testOpPlus();//+
-bool testOpPlusEq();//+=
-bool testOpMin();//-
-bool testOpMinEq();//-=
-bool testOpMul();//*
-bool testOpMulEq();//*=
-bool testOpEq(bool);//==
-bool testOpDif(bool);//!=
-bool testOpPrz();//=
-bool testChangeRead(T);//metody read i change
-};
 
-template <class T>
-TestTensor<T>::TestTensor(Tensor<T> &t1, Tensor<T> &t2, Tensor<T> &w){
-tens1=t1;
-tens2=t2;
-wynik=w;
-}
+//funkcja testujaca metody klasy Tensor dla typu int
+bool testInt();
 
-template<class T>
-void TestTensor<T>::reset(T x1, T x2, T y1, T y2){
-tens1.change(x1, 0, 0, 0);
-tens1.change(x2, 0, 0, 1);
-tens2.change(y1, 0, 0, 0);
-tens2.change(y2, 0, 0, 1);
-}
+//funkcja testujaca metody klasy Tensor dla typu double
+bool testDouble();
 
-template<class T>
-void TestTensor<T>::setResult(T x1, T x2){
-wynik.change(x1, 0, 0, 0);
-wynik.change(x2, 0, 0, 1);
-}
+//funkcja testujaca metody klasy Tensor dla typu complex
+bool testComplex();
 
-template <class T>
-bool TestTensor<T>::testOpPlus(){
-return (tens1+tens2==wynik);
-}
+//funkcja testujaca przypadek dzialania na tensorach roznych wymiarow
+bool testDimensions();
 
-template <class T>
-bool TestTensor<T>::testOpPlusEq(){
-tens1+=tens2;
-return tens1==wynik;
-}
-
-template <class T>
-bool TestTensor<T>::testOpMin(){
-return tens1-tens2==wynik;
-}
-
-template <class T>
-bool TestTensor<T>::testOpMinEq(){
-tens1-=tens2;
-return tens1==wynik;
-}
-
-template <class T>
-bool TestTensor<T>::testOpMul(){
-return tens1*tens2==wynik;
-}
-
-template <class T>
-bool TestTensor<T>::testOpMulEq(){
-tens1*=tens2;
-return tens1==wynik;
-}
-
-template<class T>
-bool TestTensor<T>::testOpEq(bool b){
-return (tens1==tens2)==b;
-}
-
-template<class T>
-bool TestTensor<T>::testOpDif(bool b){
-return (tens1!=tens2)==b;
-}
-
-template<class T>
-bool TestTensor<T>::testOpPrz(){
-tens1=tens2;
-return tens1==tens2;
-}
-
-template<class T>
-bool TestTensor<T>::testChangeRead(T w){
-tens1.change(w,0,0,0);
-return tens1.read(0,0,0)==w;
-}
-
-void testInt();
-void testDouble();
+//funkcja prezentujaca dzialanie metod cin i cout
+void testCinCout();
 
 #endif // TEST_TENSOR_H_INCLUDED
