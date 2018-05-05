@@ -21,6 +21,7 @@ public:
     Tensor( int, int, int);  //konstruktor podstawowy
     Tensor( T const &);  //konstruktor kopiujacy
     ~Tensor();  //destruktor
+    
     //przeciazenia operatorow
     Tensor& operator=(const Tensor &);
     bool operator==(Tensor const &);
@@ -31,15 +32,19 @@ public:
     Tensor& operator-=(Tensor const &);
     Tensor operator*(Tensor const &);
     Tensor& operator*=(Tensor const &);
+    
     //metody klasy
+    //wydruk wartości z zadanego pola
     inline T read(int a, int b, int c)
     {
         if (a>dimx||b>dimy||c>dimz) throw 1;
         else return tab[a][b][c];
     }
-
+    
+    //zmiana wartości na zadanym polu
     void change(T, int, int, int);
-
+    
+    //przeciążenia wyjścia i wejścia danych
     friend ostream& operator<< <> (ostream &os, const Tensor<T> &t);
 
     friend istream& operator>> <> (istream &is, Tensor<T> &t);
@@ -62,7 +67,7 @@ std::ostream& operator<<(std::ostream &os, const Tensor<T> &t)
             }
             os<<"\n";
         }
-        os<<setfill('*');//oddzielenie pol symbolami '*'
+        os<<setfill('*');//oddzielenie pól symbolami '*'
         os<<setw(5*t.dimz)<<'*'<<endl;
     }
     return os;
@@ -76,7 +81,7 @@ std:: istream& operator>> (istream &is, Tensor<T> &t)
     {
         for (int j=0; j<t.dimy; j++)
         {
-            cout<<"Podaj "<<t.dimz<<" liczb/y dla "<<i+1<<". wiersza i "<<j+1<<". kolumny:"<<endl;
+            cout<<"Podaj "<<t.dimz<<" liczb/y dla "<<i+1<<". wiersza i "<<j+1<<". kolumny:"<<endl; //informacja, pola są wypełniane
             for (int k=0; k<t.dimz; k++)
             {
                 is>>liczba;
@@ -100,7 +105,7 @@ std:: istream& operator>> (istream &is, Tensor<T> &t)
 template <class T>
 Tensor<T>::Tensor( int x=0, int y=0, int z=0)  //konstruktor podstawowy
 {
-    tab = new T **[x];
+    tab = new T **[x];//dane przechowywane w 3-wymiarowej tablicy dynamicznej
     for (int i=0; i<x; i++)
     {
         tab[i]= new T *[y];
@@ -154,7 +159,7 @@ Tensor<T>::~Tensor()  //destruktor
 template <class T>
 Tensor<T>& Tensor<T>::operator=(const Tensor &t) //przypisanie tensora
 {
-    dimx=t.dimx;
+    dimx=t.dimx;//przypisanie wymiarów
     dimy=t.dimy;
     dimz=t.dimz;
     tab = new T** [dimx];
