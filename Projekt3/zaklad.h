@@ -5,16 +5,15 @@
 
 class instytut;
 
-class zaklad : jednostkaOrganizacyjna{
-instytut* in;
+class zaklad : public jednostkaOrganizacyjna{
+instytut* zaklad_instytut;
 pracownik* dyrZakladu;
 pracownik* zcaDyrZakladu;
 public:
 zaklad(const char*, pracownik*, instytut*);
 void wyswietlDane();
-/*bool dodajPracownika(pracownik* pr);
-void wyswietlPracownikow();
-bool zwolnijPracownika(pracownik* pr);*/
+bool dodajPracownika(pracownik* pr);
+bool zwolnijPracownika(pracownik* pr);
 };
 
 #endif // ZAKLAD_H_INCLUDED

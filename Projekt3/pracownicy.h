@@ -6,6 +6,7 @@
 
 class wydzial;
 class instytut;
+class zaklad;
 
 /*plik naglowkowy dla klasy pracownik oraz klas pochodnych
 klasy pochodne roznia sie od bazowej jedynie tytulami, wiec jest
@@ -21,9 +22,9 @@ protected:
     int wiek;
     char stanowisko[ROZMIAR];
 //wydzial, instytut, zaklad, do ktorego dany pracownik nalezy:
-    wydzial* wyd;
-    instytut* ins;
-    zaklad* zak;
+    wydzial* pracownik_wydzial;
+    instytut* pracownik_instytut;
+    zaklad* pracownik_zaklad;
 
 
 public:
@@ -32,13 +33,16 @@ public:
 //wyswietlanie danych osobowych:
     virtual void wyswietlDane();
 //funkcje pozwalajace ustawiac wydzial, instytut, zaklad, do ktorego dany pracownik nalezy:
-    inline void dodajWydzial(wydzial* w) {wyd = w;}
-    inline void dodajInstytut(instytut* i) {ins = i;}
-    inline void usunInstytut(){ins = nullptr;}
-    inline void usunWydzial(){wyd = nullptr;}
+    inline void dodajWydzial(wydzial* w) {pracownik_wydzial = w;}
+    inline void dodajInstytut(instytut* i) {pracownik_instytut = i;}
+    inline void dodajZaklad(zaklad* z) {pracownik_zaklad = z;}
+    inline void usunZaklad(){pracownik_zaklad = nullptr;}
+    inline void usunInstytut(){pracownik_instytut = nullptr;}
+    inline void usunWydzial(){pracownik_wydzial = nullptr;}
 //funkcje zwracajace wskazanie na wydzial/zaklad/instytut, do ktorego dany pracownik nalezy
-    inline wydzial* wydz(){return wyd;}
-    inline instytut* inst() {return ins;}
+    inline wydzial* pokaz_wydzial(){return pracownik_wydzial;}
+    inline instytut* pokaz_instytut() {return pracownik_instytut;}
+    inline zaklad* pokaz_zaklad() {return pracownik_zaklad;}
 };
 
 //klasy pochodne:

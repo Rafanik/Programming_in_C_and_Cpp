@@ -12,7 +12,7 @@ using std::endl;
 
 instytut::instytut(const char* nazw, pracownik* dyr, wydzial* w) : jednostkaOrganizacyjna(nazw)
 {
-    wd=w;
+    instytut_wydzial=w;
     w->dodajInstytut(this);
     dyrInstytutu=dyr;
     dodajPracownika(dyrInstytutu);
@@ -55,9 +55,9 @@ int i;
         }
     }
     listaPracownikow.push_back(pr);
-    wd->dodajPracownika(pr);
+    instytut_wydzial->dodajPracownika(pr);
     pr->dodajInstytut(this);
-    pr->dodajWydzial(this->wd);
+    pr->dodajWydzial(this->instytut_wydzial);
     //cout<<"dodano pracownika"<<endl;
     return 1;
 };
@@ -70,6 +70,7 @@ bool instytut::zwolnijPracownika(pracownik* pr)
         if(listaPracownikow[i]==pr)
         {
             listaPracownikow.erase(listaPracownikow.begin()+i);
+            pr->pokaz_zaklad()->zwolnijPracownika(pr);
             pr->usunInstytut();
             //cout<<"zwolniono pracownika"<<endl<<endl;
             return 1;

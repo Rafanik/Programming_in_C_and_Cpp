@@ -7,7 +7,7 @@ class zaklad;
 class instytut : public jednostkaOrganizacyjna{
 protected:
 //wskazanie na wydzial, do ktorego nalezy instytut
-wydzial* wd;
+wydzial* instytut_wydzial;
 //pracownicy na stanowiskach zarzadzajacych
 pracownik* dyrInstytutu;
 pracownik* zcaDyrInstytutu;
@@ -28,7 +28,7 @@ bool dodajZaklad(zaklad*);
 //f wyswietlajaca zaklady
 void wyswietlZaklady();
 //f pozwalajaca ustawic wskazanie na wydzial do jakiego nalezy instytut
-inline void dodajWydzial(wydzial* w) {wd=w;}
+inline void dodajWydzial(wydzial* w) {instytut_wydzial=w;}
 };
 
 #endif // INSTYTUT_H_INCLUDED

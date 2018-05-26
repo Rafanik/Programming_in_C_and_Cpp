@@ -65,7 +65,8 @@ bool wydzial::zwolnijPracownika(pracownik* pr)
         if(listaPracownikow[i]==pr)
         {
             listaPracownikow.erase(listaPracownikow.begin()+i);
-            pr->inst()->zwolnijPracownika(pr);
+            pr->pokaz_instytut()->zwolnijPracownika(pr);
+
             pr->usunWydzial();
             //cout<<"zwolniono pracownika"<<endl<<endl;
             return 1;
