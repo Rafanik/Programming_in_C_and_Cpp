@@ -1,57 +1,55 @@
 #include <iostream>
+#include <typeinfo>
 #include "pracownicy.h"
 #include "jednostkiOrganizacyjne.h"
 #include "wydzial.h"
 #include "zaklad.h"
-#include "funkcjePracownikow.h"
+#include "tytulyNaukowe.h"
 
 using namespace std;
 
 int main()
 {
-inzynierAsystent pierwszy("Pawel","Ziomek",29);
 
-inzynierAsystent drugi("Arkadiusz", "Rybski", 30);
+pracownik pierwszy( "Pawel","Ziomek",29);
 
-inzynierWykladowca trzeci("Maroslaw","Wlodarski",55);
+pracownik drugi( "Arkadiusz", "Rybski", 30);
 
-inzynierAsystent* rr = &drugi;
+pracownik trzeci("Maroslaw","Wlodarski",55);
 
-inzynierWykladowca czwarty(rr);
+pracownik* pr = &pierwszy;
+pracownik* dr = &drugi;
+pracownik* tr = &trzeci;
 
-
-pracownik* pr = &trzeci;
-pracownik* sr = &pierwszy;
-pracownik* cr = &czwarty;
 
 pierwszy.wyswietlDane();
 drugi.wyswietlDane();
 trzeci.wyswietlDane();
-czwarty.wyswietlDane();
 
-degraduj(rr);
+pierwszy.promujNaProfesora();
+drugi.promujNaInzyniera();
+trzeci.promujNaDoktoraHab();
 
 pierwszy.wyswietlDane();
 drugi.wyswietlDane();
 trzeci.wyswietlDane();
-czwarty.wyswietlDane();
 
-wydzial eiti("EiTI",rr);
+wydzial eiti("EiTI",pr);
 wydzial* e = &eiti;
 
-instytut makro("Instytut Makroelektorniki", pr, e);
+instytut makro("Instytut Makroelektorniki", dr, e);
 
 instytut* mk = &makro;
 
-zaklad cewka("Zaklad Cewek", cr, mk);
+zaklad cewka("Zaklad Cewek", tr, mk);
 
-cewka.dodajPracownika(rr);
-
-
+cewka.dodajPracownika(dr);
 
 
 
-/*eiti.dodajPracownika(sr);
+
+
+/*eiti.dodajPracownika(pr);
 eiti.dodajInstytut(mk);
 eiti.wyswietlDane();
 cout<<endl;
@@ -63,7 +61,7 @@ cewka.wyswietlDane();
 cewka.wyswietlPracownikow();
 
 cout<<endl;
-eiti.zwolnijPracownika(cr);
+eiti.zwolnijPracownika(dr);
 eiti.wyswietlDane();
 cout<<endl;
 makro.wyswietlDane();

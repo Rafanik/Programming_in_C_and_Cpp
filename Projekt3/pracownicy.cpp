@@ -1,137 +1,84 @@
 #include "pracownicy.h"
-#include <string.h>
+#include <string>
 
 using namespace std;
 
 /*************************/
 
-pracownik::pracownik(const char* im, const char* nazw, const int w)
+pracownik::pracownik(const string im, const string nazw, const int w)
 {
-
-    cout<<"pracownik"<<endl;
-    strncpy(imie, im, ROZMIAR-1);
-    strncpy(nazwisko, nazw, ROZMIAR-1);
+    tytul = new tytulNaukowy;
+    stanowisko = new stanowiskoDydaktyczne;
+    imie = im;
+    nazwisko = nazw;
     wiek=w;
 
 };
 
 void pracownik::wyswietlDane()
 {
-    std::cout<<imie<<" "<<nazwisko<<" "<<wiek<<" lat ";
+
+    std::cout<<tytul->podajTytul()<<imie<<" "<<nazwisko<<" "<<wiek<<" lat "<<"stanowisko: "<<stanowisko->podajStanowisko()<<endl;
 };
 
-/***********************/
 
-inzynier::inzynier(const char* im, const char* nazw, const int w):pracownik(im,nazw,w)
+void pracownik::promujNaInzyniera()
 {
-
+    delete tytul;
+    tytul = new inzynier;
 };
 
-void inzynier::wyswietlDane()
+void pracownik::promujNaMagistra()
 {
-    pracownik::wyswietlDane();
+    delete tytul;
+    tytul = new magister;
 };
 
-/**********************/
-magister::magister(const char* im, const char* nazw, const int w):inzynier(im,nazw,w){};
-
-void magister::wyswietlDane(){
-std::cout<<tytul<<" ";
-pracownik::wyswietlDane();
+void pracownik::promujNaDoktora()
+{
+    delete tytul;
+    tytul = new doktor;
 };
 
-/***********************/
-
-doktor::doktor(const char* im, const char* nazw, const int w):magister(im,nazw,w){};
-
-void doktor::wyswietlDane(){
-cout<<tytul<<" ";
-pracownik::wyswietlDane();
-};
-/***********************/
-
-doktorHab::doktorHab(const char* im, const char* nazw, const int w):doktor(im,nazw,w){};
-
-void doktorHab::wyswietlDane(){
-cout<<tytul<<" ";
-pracownik::wyswietlDane();
+void pracownik::promujNaDoktoraHab()
+{
+    delete tytul;
+    tytul = new doktorHab;
 };
 
-/*********************/
-
-profesor::profesor(const char* im, const char* nazw, const int w):doktorHab(im,nazw,w){};
-
-void profesor::wyswietlDane(){
-cout<<tytul<<" ";
-pracownik::wyswietlDane();
+void pracownik::promujNaProfesora()
+{
+    delete tytul;
+    tytul = new profesor;
 };
 
-/********************/
+    void pracownik::promujNaAsystenta(){
+    delete stanowisko;
+    stanowisko = new asystent;
+    };
+    void pracownik::promujNaAdiunkta(){
+    delete stanowisko;
+    stanowisko = new adiunkt;
+    };
+    void pracownik::promujNaProfesoraNadzw(){
+    delete stanowisko;
+    stanowisko = new profesorNadzw;
+    };
+    void pracownik::promujNaProfesoraZw(){
+    delete stanowisko;
+    stanowisko = new profesorZw;
+    };
 
-asystent::asystent(const char* im, const char* nazw, const int w):pracownik(im,nazw,w){};
+    void pracownik::promujNaWykladowce(){
+    delete stanowisko;
+    stanowisko = new wykladowca;
+    };
+    void pracownik::promujNaSatrszegoWykladowce(){
+    delete stanowisko;
+    stanowisko = new starszyWykladowca;
+    };
+    void pracownik::promujNaDocenta(){
+    delete stanowisko;
+    stanowisko = new docent;
+    };
 
-/*********************/
-
-adiunkt::adiunkt(const char* im, const char* nazw, const int w):asystent(im,nazw,w){};
-
-/*********************/
-
-profesorNadzw::profesorNadzw(const char* im, const char* nazw, const int w):adiunkt(im,nazw,w){};
-
-/**********************/
-
-profesorZw::profesorZw(const char* im, const char* nazw, const int w):profesorNadzw(im,nazw,w){};
-
-/************************/
-
-wykladowca::wykladowca(const char* im, const char* nazw, const int w):pracownik(im,nazw,w){};
-
-/************************/
-
-starszyWykladowca::starszyWykladowca(const char* im, const char* nazw, const int w):wykladowca(im,nazw,w){};
-
-/***********************/
-
-docent::docent(const char* im, const char* nazw, const int w):starszyWykladowca(im,nazw,w){};
-
-/*************************/
-
-inzynierWykladowca::inzynierWykladowca(const char* im, const char* nazw, const int w){
-
-    strncpy(imie, im, ROZMIAR-1);
-    strncpy(nazwisko, nazw, ROZMIAR-1);
-    wiek=w;
-
-};
-
-inzynierWykladowca::inzynierWykladowca(inzynierAsystent* inz){
-  strncpy(imie, inz->podajImie() , ROZMIAR-1);
-    strncpy(nazwisko, inz->podajNazwisko(), ROZMIAR-1);
-    wiek=inz->podajWiek();
-}
-
-void inzynierWykladowca::wyswietlDane(){
-
-cout<<inzynier::tytul;
-pracownik::wyswietlDane();
-cout<<"stanowisko: "<<wykladowca::stanowisko<<endl;
-
-}
-
-/************************/
-
-inzynierAsystent::inzynierAsystent(const char* im, const char* nazw, const int w){
-
-    strncpy(imie, im, ROZMIAR-1);
-    strncpy(nazwisko, nazw, ROZMIAR-1);
-    wiek=w;
-
-};
-
-void inzynierAsystent::wyswietlDane(){
-
-cout<<inzynier::tytul;
-pracownik::wyswietlDane();
-cout<<"stanowisko: "<<asystent::stanowisko<<endl;
-
-}
