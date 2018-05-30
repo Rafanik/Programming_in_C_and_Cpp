@@ -5,13 +5,18 @@
 #include "wydzial.h"
 #include "zaklad.h"
 #include "tytulyNaukowe.h"
+#include "daneEiTI.h"
+#include "interfejs.h"
 
 using namespace std;
+
 
 int main()
 {
 
-pracownik pierwszy( "Pawel","Ziomek",29);
+interfejs();
+
+/*pracownik pierwszy( "Pawel","Ziomek",29);
 
 pracownik drugi( "Arkadiusz", "Rybski", 30);
 
@@ -43,7 +48,7 @@ instytut* mk = &makro;
 
 zaklad cewka("Zaklad Cewek", tr, mk);
 
-cewka.dodajPracownika(dr);
+cewka.dodajPracownika(dr);*/
 
 
 
@@ -72,3 +77,5 @@ cewka.wyswietlDane();
 cewka.wyswietlPracownikow();*/
 
 }
+
+

@@ -10,7 +10,7 @@
 using std::cout;
 using std::endl;
 
-instytut::instytut(const char* nazw, pracownik* dyr, wydzial* w) : jednostkaOrganizacyjna(nazw)
+instytut::instytut(const string nazw, pracownik* dyr, wydzial* w) : jednostkaOrganizacyjna(nazw)
 {
     instytut_wydzial=w;
     w->dodajInstytut(this);
@@ -70,7 +70,10 @@ bool instytut::zwolnijPracownika(pracownik* pr)
         if(listaPracownikow[i]==pr)
         {
             listaPracownikow.erase(listaPracownikow.begin()+i);
+            if(pr->pokaz_zaklad()!=nullptr)
+            {
             pr->pokaz_zaklad()->zwolnijPracownika(pr);
+            }
             pr->usunInstytut();
             //cout<<"zwolniono pracownika"<<endl<<endl;
             return 1;

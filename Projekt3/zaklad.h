@@ -10,7 +10,7 @@ instytut* zaklad_instytut;
 pracownik* dyrZakladu;
 pracownik* zcaDyrZakladu;
 public:
-zaklad(const char*, pracownik*, instytut*);
+zaklad(const string, pracownik*, instytut*);
 void wyswietlDane();
 bool dodajPracownika(pracownik* pr);
 bool zwolnijPracownika(pracownik* pr);

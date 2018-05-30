@@ -16,7 +16,7 @@ std::vector<zaklad *> listaZakladow;
 
 public:
 //f tworzaca nowy instytut na konkretnym wydziale
-instytut(const char*,pracownik*,wydzial*);
+instytut(const string,pracownik*,wydzial*);
 //f wyswietlajaca nazwe instytutu, dyrektora i liczbe pracownikow
 void wyswietlDane();
 //f dodaje pracownika do instytutu i jesli nie jest pracownikkiem wydzialu to rowniez do wydzialu

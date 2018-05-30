@@ -18,7 +18,7 @@ pracownik::pracownik(const string im, const string nazw, const int w)
 void pracownik::wyswietlDane()
 {
 
-    std::cout<<tytul->podajTytul()<<imie<<" "<<nazwisko<<" "<<wiek<<" lat "<<"stanowisko: "<<stanowisko->podajStanowisko()<<endl;
+    std::cout<<tytul->podajTytul()<<imie<<" "<<nazwisko<<" "<<wiek<<" lat "<<endl;
 };
 
 

@@ -28,9 +28,9 @@ protected:
     tytulNaukowy* tytul;
     stanowiskoDydaktyczne* stanowisko;
 //wydzial, instytut, zaklad, do ktorego dany pracownik nalezy:
-    wydzial* pracownik_wydzial;
-    instytut* pracownik_instytut;
-    zaklad* pracownik_zaklad;
+    wydzial* pracownik_wydzial=nullptr;
+    instytut* pracownik_instytut=nullptr;
+    zaklad* pracownik_zaklad=nullptr;
     inzynier nowyInzynier();
     void promujNaukowo(tytulNaukowy);
 
@@ -90,6 +90,7 @@ public:
     {
         return pracownik_zaklad;
     }
+
 //funkcje promujace
     void promujNaInzyniera();
     void promujNaMagistra();

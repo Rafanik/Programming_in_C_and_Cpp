@@ -10,8 +10,8 @@
 using std::cout;
 using std::endl;
 
-jednostkaOrganizacyjna::jednostkaOrganizacyjna(const char* nazw){
-strncpy(nazwa,nazw,ROZMIAR);
+jednostkaOrganizacyjna::jednostkaOrganizacyjna(const string nazw){
+nazwa = nazw;
 };
 
 bool jednostkaOrganizacyjna::dodajPracownika(pracownik* pr)
@@ -35,6 +35,7 @@ void jednostkaOrganizacyjna::wyswietlPracownikow()
     int i;
     for (i=0; i<listaPracownikow.size(); i++)
     {
+        cout<<i+1<<". ";
         listaPracownikow[i]->wyswietlDane();
     }
 };

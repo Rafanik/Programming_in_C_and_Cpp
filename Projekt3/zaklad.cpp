@@ -10,7 +10,7 @@
 using std::cout;
 using std::endl;
 
-zaklad::zaklad(const char* nazw, pracownik* dyr, instytut* i) : jednostkaOrganizacyjna(nazw)
+zaklad::zaklad(const string nazw, pracownik* dyr, instytut* i) : jednostkaOrganizacyjna(nazw)
 {
     zaklad_instytut=i;
     zaklad_instytut->dodajZaklad(this);
@@ -56,7 +56,6 @@ bool zaklad::zwolnijPracownika(pracownik* pr)
         {
             listaPracownikow.erase(listaPracownikow.begin()+i);
             pr->usunZaklad();
-            cout<<"zwolniono pracownika"<<endl<<endl;
             return 1;
         }
     }
