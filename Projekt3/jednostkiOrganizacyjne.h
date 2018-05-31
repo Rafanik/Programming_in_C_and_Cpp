@@ -28,6 +28,9 @@ public:
         return listaPracownikow[i-1];
     }
 
+    inline int liczbaPracownikow(){return listaPracownikow.size();};
+
+    inline string pokazNazwe(){return nazwa;};
 };
 
 

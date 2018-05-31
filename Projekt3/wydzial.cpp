@@ -21,17 +21,18 @@ void wydzial::wyswietlDane()
     dziekan->pracownik::wyswietlDane();
     cout<<"prodziekani:"<<listaProdziekanow.size()<<endl;
     cout<<"pracownicy:"<<listaPracownikow.size()<<endl;
-    cout<<"instytuty:"<<listaInstytutow.size()<<endl;
+    cout<<"instytuty:"<<listaInstytutow.size()<<endl<<endl;
 };
 
 void wydzial::wyswietlInstytuty()
 {
-    cout<<endl<<"Instytuty: "<<endl<<endl;
+    cout<<"Instytuty: "<<endl<<endl;
     int i;
     for (i=0; i<listaInstytutow.size(); i++)
     {
-        listaInstytutow[i]->wyswietlDane();
+        cout<<i+1<<". "<<listaInstytutow[i]->pokazNazwe()<<endl;
     }
+    cout<<endl;
 };
 
 bool wydzial::dodajInstytut(instytut* inst)

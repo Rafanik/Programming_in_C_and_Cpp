@@ -29,6 +29,10 @@ bool dodajZaklad(zaklad*);
 void wyswietlZaklady();
 //f pozwalajaca ustawic wskazanie na wydzial do jakiego nalezy instytut
 inline void dodajWydzial(wydzial* w) {instytut_wydzial=w;}
+
+inline string pokazNazwe(){return nazwa;};
+
+inline zaklad* pokazZaklad(int i){return listaZakladow[i-1];};
 };
 
 #endif // INSTYTUT_H_INCLUDED

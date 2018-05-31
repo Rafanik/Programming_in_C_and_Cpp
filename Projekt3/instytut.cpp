@@ -20,10 +20,10 @@ instytut::instytut(const string nazw, pracownik* dyr, wydzial* w) : jednostkaOrg
 
 void instytut::wyswietlDane()
 {
-    cout<<"instytut:"<<nazwa<<endl<<"Dyrektor: ";
+    cout<<nazwa<<endl<<"Dyrektor: ";
     dyrInstytutu->wyswietlDane();
     cout<<"pracownicy:"<<listaPracownikow.size()<<endl;
-    cout<<"zakladay:"<<listaZakladow.size()<<endl;
+    cout<<"zakladay:"<<listaZakladow.size()<<endl<<endl;
 };
 
 bool instytut::dodajZaklad(zaklad* zakl)
@@ -81,4 +81,15 @@ bool instytut::zwolnijPracownika(pracownik* pr)
     }
     cout<<"nie zwolniono pracownika"<<endl;
     return 0;
+};
+
+void instytut::wyswietlZaklady()
+{
+    cout<<"Zaklady: "<<endl<<endl;
+    int i;
+    for (i=0; i<listaZakladow.size(); i++)
+    {
+        cout<<i+1<<". "<<listaZakladow[i]->pokazNazwe()<<endl;
+    }
+    cout<<endl;
 };

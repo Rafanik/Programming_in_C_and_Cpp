@@ -20,9 +20,9 @@ zaklad::zaklad(const string nazw, pracownik* dyr, instytut* i) : jednostkaOrgani
 
 void zaklad::wyswietlDane()
 {
-    cout<<"instytut:"<<nazwa<<endl<<"Dyrektor: ";
+    cout<<nazwa<<endl<<"Dyrektor: ";
     dyrZakladu->wyswietlDane();
-    cout<<"pracownicy:"<<listaPracownikow.size()<<endl;
+    cout<<"pracownicy:"<<listaPracownikow.size()<<endl<<endl;
 };
 
 

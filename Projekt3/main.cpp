@@ -13,8 +13,12 @@ using namespace std;
 
 int main()
 {
-
+try{
 interfejs();
+}
+catch (string e){
+cout<<"BLAD! "<<e<<endl;
+}
 
 /*pracownik pierwszy( "Pawel","Ziomek",29);
 

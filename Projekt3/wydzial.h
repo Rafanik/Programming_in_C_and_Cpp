@@ -26,6 +26,12 @@ bool dodajPracownika(pracownik*);
 bool dodajProdziekana(pracownik*);
 //f zwlaniajaca pracownika z wydzialu (a co za tym idzie z instytutow i zakladow, w ktorych pracuje)
 bool zwolnijPracownika(pracownik*);
+
+inline int liczbaPracownikow(){return listaPracownikow.size();};
+
+inline int liczbaInstytutow(){return listaInstytutow.size();};
+
+inline instytut* pokazInstytut(int i){return listaInstytutow[i-1];};
 };
 
 
