@@ -1,11 +1,6 @@
 #include <iostream>
 #include <typeinfo>
-#include "pracownicy.h"
 #include "jednostkiOrganizacyjne.h"
-#include "wydzial.h"
-#include "zaklad.h"
-#include "tytulyNaukowe.h"
-#include "daneEiTI.h"
 #include "interfejs.h"
 
 using namespace std;
@@ -13,12 +8,7 @@ using namespace std;
 
 int main()
 {
-try{
-interfejs();
-}
-catch (string e){
-cout<<"BLAD! "<<e<<endl;
-}
+interfejsBezpieczny();
 
 /*pracownik pierwszy( "Pawel","Ziomek",29);
 

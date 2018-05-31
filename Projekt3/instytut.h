@@ -33,6 +33,8 @@ inline void dodajWydzial(wydzial* w) {instytut_wydzial=w;}
 inline string pokazNazwe(){return nazwa;};
 
 inline zaklad* pokazZaklad(int i){return listaZakladow[i-1];};
+
+inline int liczbaZakladow(){return listaZakladow.size();};
 };
 
 #endif // INSTYTUT_H_INCLUDED

@@ -20,12 +20,16 @@ void wyswietlDane();
 bool dodajInstytut(instytut*);
 //f wyswietlajaca dane instytutow nalezacych do wydzialu
 void wyswietlInstytuty();
+
+void wyswietlProdziekanow();
 //f dodajaca pracownika do wydzialu (nie do konkretnego zakladu czy instytutu)
 bool dodajPracownika(pracownik*);
 //f dodajaca prodziekana (jesli nie jest pracownikiem wydzialu to rowniez do wydzialu)
 bool dodajProdziekana(pracownik*);
 //f zwlaniajaca pracownika z wydzialu (a co za tym idzie z instytutow i zakladow, w ktorych pracuje)
 bool zwolnijPracownika(pracownik*);
+
+inline pracownik* pokazDziekana(){return dziekan;};
 
 inline int liczbaPracownikow(){return listaPracownikow.size();};
 

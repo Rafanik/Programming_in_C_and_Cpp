@@ -35,6 +35,19 @@ void wydzial::wyswietlInstytuty()
     cout<<endl;
 };
 
+void wydzial::wyswietlProdziekanow()
+{
+    cout<<"Prodziekani: "<<endl<<endl;
+    int i;
+    for (i=0; i<listaProdziekanow.size(); i++)
+    {
+        cout<<i+1<<". ";
+        listaProdziekanow[i]->wyswietlDane();
+    }
+    cout<<endl;
+};
+
+
 bool wydzial::dodajInstytut(instytut* inst)
 {
     int i;

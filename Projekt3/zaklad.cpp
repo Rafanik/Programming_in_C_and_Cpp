@@ -36,7 +36,7 @@ int i;
         {
 
 
-          //cout<<"ten pracownik juz tu pracuje"<<endl;
+          cout<<"ten pracownik juz tu pracuje"<<endl;
             return 0;
         }
     }
@@ -50,7 +50,7 @@ int i;
 bool zaklad::zwolnijPracownika(pracownik* pr)
 {
     int i;
-    for(i = 0; i<listaPracownikow.size(); i++)
+    for(i = 0; i<=listaPracownikow.size(); i++)
     {
         if(listaPracownikow[i]==pr)
         {
