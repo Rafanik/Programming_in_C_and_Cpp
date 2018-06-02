@@ -52,6 +52,10 @@ public:
     {
         return wiek;
     }
+    inline string podajStanowisko()
+    {
+        return stanowisko->podajStanowisko();
+    }
 //funkcje pozwalajace ustawiac wydzial, instytut, zaklad, do ktorego dany pracownik nalezy:
     inline void dodajWydzial(wydzial* w)
     {

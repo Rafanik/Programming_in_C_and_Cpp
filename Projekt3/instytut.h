@@ -29,12 +29,16 @@ bool dodajZaklad(zaklad*);
 void wyswietlZaklady();
 //f pozwalajaca ustawic wskazanie na wydzial do jakiego nalezy instytut
 inline void dodajWydzial(wydzial* w) {instytut_wydzial=w;}
-
+//f zwracajaca nazwe instytutu
 inline string pokazNazwe(){return nazwa;};
-
+//f zwracajaca wskaznik na zaklad z listy (numerowanej od 1.)
 inline zaklad* pokazZaklad(int i){return listaZakladow[i-1];};
-
+//f zwracajac liczbe zakladow
 inline int liczbaZakladow(){return listaZakladow.size();};
+//f zwracajaca wskaznik na dyrektora instytutu
+inline pracownik* pokazDyrektora(){return dyrInstytutu;};
+//funkcja zmieniajaca dyrektora instytutu
+inline void zmienDyrektora(pracownik* pr){dyrInstytutu=pr;}
 };
 
 #endif // INSTYTUT_H_INCLUDED

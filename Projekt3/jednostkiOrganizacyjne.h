@@ -27,9 +27,9 @@ public:
     {
         return listaPracownikow[i-1];
     }
-
+//metoda zwracajaca liczbe pracownikow
     inline int liczbaPracownikow(){return listaPracownikow.size();};
-
+//metoda zwracajaca nazwe danej jednostki;
     inline string pokazNazwe(){return nazwa;};
 };
 

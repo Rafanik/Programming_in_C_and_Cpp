@@ -2,6 +2,7 @@
 #define TYTULYNAUKOWE_H_INCLUDED
 #include <string>
 using namespace std;
+
 //sciezka naukowa
 
 class tytulNaukowy
