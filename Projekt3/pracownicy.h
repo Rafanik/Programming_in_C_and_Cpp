@@ -56,6 +56,10 @@ public:
     {
         return stanowisko->podajStanowisko();
     }
+    inline string podajTytul()
+    {
+        return tytul->podajTytul();
+    }
 //funkcje pozwalajace ustawiac wydzial, instytut, zaklad, do ktorego dany pracownik nalezy:
     inline void dodajWydzial(wydzial* w)
     {
