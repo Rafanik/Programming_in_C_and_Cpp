@@ -140,31 +140,80 @@ void interfejs(wydzial* wydz)
                 cin>>wpisane;
                 if (wpisane == "1")
                 {
-                    prac->promujNaAsystenta();
+                    if(prac->podajTytul()=="inz. "||prac->podajTytul()=="mgr inz. ")
+                    {
+                        prac->promujNaAsystenta();
+                    }
+                    else
+                    {
+                        throw blad.niezgodnosc;
+                    }
                 }
                 if (wpisane == "2")
                 {
-                    prac->promujNaAdiunkta();
+                    if(prac->podajTytul()=="dr "||prac->podajTytul()=="dr hab. ")
+                    {
+                        prac->promujNaAdiunkta();
+                    }
+                    else
+                    {
+                        throw blad.niezgodnosc;
+                    }
                 }
                 if (wpisane == "3")
                 {
-                    prac->promujNaProfesoraZw();
+                    if(prac->podajTytul()=="prof.")
+                    {
+                        prac->promujNaProfesoraZw();
+                    }
+                    else
+                    {
+                        throw blad.niezgodnosc;
+                    }
                 }
                 if (wpisane == "4")
                 {
-                    prac->promujNaProfesoraNadzw();
+                    if(prac->podajTytul()=="prof. "||prac->podajTytul()=="dr hab. ")
+                    {
+                        prac->promujNaProfesoraNadzw();
+                    }
+                    else
+                    {
+                        throw blad.niezgodnosc;
+                    }
                 }
                 if (wpisane == "5")
                 {
-                    prac->promujNaWykladowce();
+                    if(prac->podajStanowisko()=="asystent")
+                    {
+                        prac->promujNaWykladowce();
+                    }
+                    else
+                    {
+                        throw blad.niezgodnosc;
+                    }
                 }
                 if (wpisane == "6")
                 {
-                    prac->promujNaSatrszegoWykladowce();
+                    if(prac->podajStanowisko()=="adiunkt")
+                    {
+                        prac->promujNaSatrszegoWykladowce();
+                    }
+                    else
+                    {
+                        throw blad.niezgodnosc;
+                    }
                 }
                 if (wpisane == "7")
                 {
-                    prac->promujNaDocenta();
+                    if(prac->podajStanowisko()=="profesor nadzwyczajny")
+                    {
+                        prac->promujNaDocenta();
+                    }
+                    else
+                    {
+                        throw blad.niezgodnosc;
+                    }
                 }
                 wydz->dodajPracownika(prac);
                 cout<<"Dodano pracownika: ";
@@ -359,31 +408,80 @@ void interfejs(wydzial* wydz)
                     cin>>wpisane;
                     if (wpisane == "1")
                     {
-                        prac->promujNaAsystenta();
+                        if(prac->podajTytul()=="inz. "||prac->podajTytul()=="mgr inz. ")
+                        {
+                            prac->promujNaAsystenta();
+                        }
+                        else
+                        {
+                            throw blad.niezgodnosc;
+                        }
                     }
                     if (wpisane == "2")
                     {
-                        prac->promujNaAdiunkta();
+                        if(prac->podajTytul()=="dr "||prac->podajTytul()=="dr hab. ")
+                        {
+                            prac->promujNaAdiunkta();
+                        }
+                        else
+                        {
+                            throw blad.niezgodnosc;
+                        }
                     }
                     if (wpisane == "3")
                     {
-                        prac->promujNaProfesoraZw();
+                        if(prac->podajTytul()=="prof.")
+                        {
+                            prac->promujNaProfesoraZw();
+                        }
+                        else
+                        {
+                            throw blad.niezgodnosc;
+                        }
                     }
                     if (wpisane == "4")
                     {
-                        prac->promujNaProfesoraNadzw();
+                        if(prac->podajTytul()=="prof. "||prac->podajTytul()=="dr hab. ")
+                        {
+                            prac->promujNaProfesoraNadzw();
+                        }
+                        else
+                        {
+                            throw blad.niezgodnosc;
+                        }
                     }
                     if (wpisane == "5")
                     {
-                        prac->promujNaWykladowce();
+                        if(prac->podajStanowisko()=="asystent")
+                        {
+                            prac->promujNaWykladowce();
+                        }
+                        else
+                        {
+                            throw blad.niezgodnosc;
+                        }
                     }
                     if (wpisane == "6")
                     {
-                        prac->promujNaSatrszegoWykladowce();
+                        if(prac->podajStanowisko()=="adiunkt")
+                        {
+                            prac->promujNaSatrszegoWykladowce();
+                        }
+                        else
+                        {
+                            throw blad.niezgodnosc;
+                        }
                     }
                     if (wpisane == "7")
                     {
-                        prac->promujNaDocenta();
+                        if(prac->podajStanowisko()=="profesor nadzwyczajny")
+                        {
+                            prac->promujNaDocenta();
+                        }
+                        else
+                        {
+                            throw blad.niezgodnosc;
+                        }
                     }
                     inst->dodajPracownika(prac);
                     cout<<"Dodano pracownika: ";
@@ -461,31 +559,80 @@ void interfejs(wydzial* wydz)
                     cin>>wpisane;
                     if (wpisane == "1")
                     {
-                        prac->promujNaAsystenta();
+                        if(prac->podajTytul()=="inz. "||prac->podajTytul()=="mgr inz. ")
+                        {
+                            prac->promujNaAsystenta();
+                        }
+                        else
+                        {
+                            throw blad.niezgodnosc;
+                        }
                     }
                     if (wpisane == "2")
                     {
-                        prac->promujNaAdiunkta();
+                        if(prac->podajTytul()=="dr "||prac->podajTytul()=="dr hab. ")
+                        {
+                            prac->promujNaAdiunkta();
+                        }
+                        else
+                        {
+                            throw blad.niezgodnosc;
+                        }
                     }
                     if (wpisane == "3")
                     {
-                        prac->promujNaProfesoraZw();
+                        if(prac->podajTytul()=="prof.")
+                        {
+                            prac->promujNaProfesoraZw();
+                        }
+                        else
+                        {
+                            throw blad.niezgodnosc;
+                        }
                     }
                     if (wpisane == "4")
                     {
-                        prac->promujNaProfesoraNadzw();
+                        if(prac->podajTytul()=="prof. "||prac->podajTytul()=="dr hab. ")
+                        {
+                            prac->promujNaProfesoraNadzw();
+                        }
+                        else
+                        {
+                            throw blad.niezgodnosc;
+                        }
                     }
                     if (wpisane == "5")
                     {
-                        prac->promujNaWykladowce();
+                        if(prac->podajStanowisko()=="asystent")
+                        {
+                            prac->promujNaWykladowce();
+                        }
+                        else
+                        {
+                            throw blad.niezgodnosc;
+                        }
                     }
                     if (wpisane == "6")
                     {
-                        prac->promujNaSatrszegoWykladowce();
+                        if(prac->podajStanowisko()=="adiunkt")
+                        {
+                            prac->promujNaSatrszegoWykladowce();
+                        }
+                        else
+                        {
+                            throw blad.niezgodnosc;
+                        }
                     }
                     if (wpisane == "7")
                     {
-                        prac->promujNaDocenta();
+                        if(prac->podajStanowisko()=="profesor nadzwyczajny")
+                        {
+                            prac->promujNaDocenta();
+                        }
+                        else
+                        {
+                            throw blad.niezgodnosc;
+                        }
                     }
                     cout<<"Wypromowano pracownika: ";
                     prac->wyswietlDane();
@@ -645,31 +792,80 @@ void interfejs(wydzial* wydz)
                         cin>>wpisane;
                         if (wpisane == "1")
                         {
-                            prac->promujNaAsystenta();
+                            if(prac->podajTytul()=="inz. "||prac->podajTytul()=="mgr inz. ")
+                            {
+                                prac->promujNaAsystenta();
+                            }
+                            else
+                            {
+                                throw blad.niezgodnosc;
+                            }
                         }
                         if (wpisane == "2")
                         {
-                            prac->promujNaAdiunkta();
+                            if(prac->podajTytul()=="dr "||prac->podajTytul()=="dr hab. ")
+                            {
+                                prac->promujNaAdiunkta();
+                            }
+                            else
+                            {
+                                throw blad.niezgodnosc;
+                            }
                         }
                         if (wpisane == "3")
                         {
-                            prac->promujNaProfesoraZw();
+                            if(prac->podajTytul()=="prof.")
+                            {
+                                prac->promujNaProfesoraZw();
+                            }
+                            else
+                            {
+                                throw blad.niezgodnosc;
+                            }
                         }
                         if (wpisane == "4")
                         {
-                            prac->promujNaProfesoraNadzw();
+                            if(prac->podajTytul()=="prof. "||prac->podajTytul()=="dr hab. ")
+                            {
+                                prac->promujNaProfesoraNadzw();
+                            }
+                            else
+                            {
+                                throw blad.niezgodnosc;
+                            }
                         }
                         if (wpisane == "5")
                         {
-                            prac->promujNaWykladowce();
+                            if(prac->podajStanowisko()=="asystent")
+                            {
+                                prac->promujNaWykladowce();
+                            }
+                            else
+                            {
+                                throw blad.niezgodnosc;
+                            }
                         }
                         if (wpisane == "6")
                         {
-                            prac->promujNaSatrszegoWykladowce();
+                            if(prac->podajStanowisko()=="adiunkt")
+                            {
+                                prac->promujNaSatrszegoWykladowce();
+                            }
+                            else
+                            {
+                                throw blad.niezgodnosc;
+                            }
                         }
                         if (wpisane == "7")
                         {
-                            prac->promujNaDocenta();
+                            if(prac->podajStanowisko()=="profesor nadzwyczajny")
+                            {
+                                prac->promujNaDocenta();
+                            }
+                            else
+                            {
+                                throw blad.niezgodnosc;
+                            }
                         }
                         zak->dodajPracownika(prac);
                         cout<<"Dodano pracownika: ";
@@ -748,31 +944,80 @@ void interfejs(wydzial* wydz)
                         cin>>wpisane;
                         if (wpisane == "1")
                         {
-                            prac->promujNaAsystenta();
+                            if(prac->podajTytul()=="inz. "||prac->podajTytul()=="mgr inz. ")
+                            {
+                                prac->promujNaAsystenta();
+                            }
+                            else
+                            {
+                                throw blad.niezgodnosc;
+                            }
                         }
                         if (wpisane == "2")
                         {
-                            prac->promujNaAdiunkta();
+                            if(prac->podajTytul()=="dr "||prac->podajTytul()=="dr hab. ")
+                            {
+                                prac->promujNaAdiunkta();
+                            }
+                            else
+                            {
+                                throw blad.niezgodnosc;
+                            }
                         }
                         if (wpisane == "3")
                         {
-                            prac->promujNaProfesoraZw();
+                            if(prac->podajTytul()=="prof.")
+                            {
+                                prac->promujNaProfesoraZw();
+                            }
+                            else
+                            {
+                                throw blad.niezgodnosc;
+                            }
                         }
                         if (wpisane == "4")
                         {
-                            prac->promujNaProfesoraNadzw();
+                            if(prac->podajTytul()=="prof. "||prac->podajTytul()=="dr hab. ")
+                            {
+                                prac->promujNaProfesoraNadzw();
+                            }
+                            else
+                            {
+                                throw blad.niezgodnosc;
+                            }
                         }
                         if (wpisane == "5")
                         {
-                            prac->promujNaWykladowce();
+                            if(prac->podajStanowisko()=="asystent")
+                            {
+                                prac->promujNaWykladowce();
+                            }
+                            else
+                            {
+                                throw blad.niezgodnosc;
+                            }
                         }
                         if (wpisane == "6")
                         {
-                            prac->promujNaSatrszegoWykladowce();
+                            if(prac->podajStanowisko()=="adiunkt")
+                            {
+                                prac->promujNaSatrszegoWykladowce();
+                            }
+                            else
+                            {
+                                throw blad.niezgodnosc;
+                            }
                         }
                         if (wpisane == "7")
                         {
-                            prac->promujNaDocenta();
+                            if(prac->podajStanowisko()=="profesor nadzwyczajny")
+                            {
+                                prac->promujNaDocenta();
+                            }
+                            else
+                            {
+                                throw blad.niezgodnosc;
+                            }
                         }
 
                         cout<<"Wypromowano pracownika: ";

@@ -8,6 +8,7 @@ public:
     const string liczba= "Nie podano liczby!";
     const string zwolnienieDziekana= "Nie mozna zwolnic dziekana!";
     const string zwolnienieDyrektora="Nie mozna zwolnic dyrektora!";
+    const string niezgodnosc = "Pracownik o takim tytule nie moze zajac takiego stanowiska naukowego!";
     const string koniecProgramu= "Zakonczono dzialanie programu";
 };
 //funkcja umozliwiajaca dzialanie na wskazanym wydziale
